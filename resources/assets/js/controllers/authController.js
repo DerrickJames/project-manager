@@ -8,7 +8,6 @@
 			$scope.authenticate = function(provider) {
 				$auth.authenticate(provider)
 					.then(function(response) {
-						console.log('Response: ', response);
 						$state.go('repos', {});
 					})
 
