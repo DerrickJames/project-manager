@@ -12,5 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+Route::post('auth/github', 'Api\V1\AuthenticateController@authenticate');

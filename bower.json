@@ -1,0 +1,28 @@
+{
+  "name": "project-manager",
+  "version": "0.0.1",
+  "authors": [
+    "DerrickJames <dmushangi@gmail.com>"
+  ],
+  "description": "GitHub Project Manager",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "https://github.com/DerrickJames/project-manager",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/bower_dl",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5",
+    "angular": "~1.4.7",
+    "angular-ui-router": "~0.2.15",
+    "satellizer": "~0.12.5",
+    "font-awesome": "fontawesome#~4.4.0"
+  }
+}
