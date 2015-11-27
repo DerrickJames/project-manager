@@ -1,5 +1,33 @@
-<div class="col-sm-4 col-sm-offset-4">
-    <div class="well">
-        <h3>Repos View</h3>
-    </div>
+<div class="col-sm-10 col-sm-offset-1">
+
+	<div class="panel panel-info">
+        <div class="panel-heading" ng-if="authenticated">{{currentUser.username}}'s Repos</div>		
+		<div class="panel-body">
+			
+			<i class="fa fa-spinner fa-pulse fa-2x" ng-show="loading"></i>
+
+			<div class="alert alert-danger" ng-if="error">
+            	<strong>There was an error: </strong> {{error.error}}
+            	<br>Please go back and login again
+        	</div>
+
+			<ul class="media-list" ng-if="repos">
+			    <li class="media" ng-repeat="repo in repos">
+			        <div class="media-left">
+			            <a href="{{ repo.branches_url }}">
+			            	<i class="fa fa-github"></i>
+			            </a>
+			        </div>
+			        <div class="media-body">
+			        	<a href="{{ repo.html_url }}">
+				            <h4 class="media-heading">{{ repo.name }}</h4>
+			        	</a>
+			            {{ repo.description }}
+			        </div>
+			    </li>
+			</ul>
+
+		</div>
+	</div>
+
 </div>
