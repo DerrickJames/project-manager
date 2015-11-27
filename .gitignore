@@ -2,6 +2,7 @@
 /bootstrap/compiled.php
 /vendor
 /node_modules
+/public/assets/js/application.js.map
 Homestead.yaml
 Homestead.json
 .env.*.php
