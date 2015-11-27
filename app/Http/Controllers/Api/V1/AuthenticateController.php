@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers\Api\V1;
 
@@ -15,7 +15,7 @@ class AuthenticateController extends Controller
 {
 	public function authenticate(Request $request)
 	{
-		if($request->has('redirectUri')) {
+       if($request->has('redirectUri')) {
 			config()->set("services.github.redirect", $request->get('redirectUri'));
 		}
 
@@ -26,16 +26,39 @@ class AuthenticateController extends Controller
 
 		if(! $user) {
 			return response()->json(['error' => 'invalid_user'], 401);
-		}
-		
+        }
+
         $providerUser = $this->findOrCreateUser($user);
 
         Auth::login($providerUser, true);
 
         $token = $this->generateToken($providerUser);
 
-        return response()->json(compact('token'));	
-	}
+        return response()->json(compact('token'));
+    }
+
+    public function getAuthenticatedUser()
+    {
+        try {
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }
+        } catch(Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+
+            return response()->json(['token_expired'], $e->getStatusCode());
+
+        } catch(Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+
+            return response()->json(['token_invalid'], $e->getStatusCode());
+
+        } catch(Tymon\JWTAuth\Exceptions\JWTException $e) {
+
+            return response()->json(['token_absent'], $e->getStatusCode());
+
+        }
+
+        return response()->json(compact('user'));
+    }
 
     private function findOrCreateUser($user)
     {
@@ -47,9 +70,10 @@ class AuthenticateController extends Controller
 
         return User::create([
             'username'  => $user->name,
-            'email' => $user->email,
+            'nickname'  => $user->nickname,
+            'email'     => $user->email,
             'github_id' => $user->id,
-            'avatar' => $user->avatar
+            'avatar'    => $user->avatar
         ]);
     }	
 
