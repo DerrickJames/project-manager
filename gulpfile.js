@@ -16,6 +16,7 @@ var elixir = require('laravel-elixir');
  */
 elixir(function(mix) {
 
+    mix.phpUnit();
 	// Copy files
 	mix.copy('vendor/bower_dl/jquery/dist/jquery.js', 'resources/assets/js/');
 	mix.copy('vendor/bower_dl/bootstrap/less/**', 'resources/assets/less/bootstrap');
